@@ -19,9 +19,9 @@ public class Exo4
         	
         	connect.close();
     		
-    	} catch (Exception e){
-    		
-    	}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
     	
     }
 }

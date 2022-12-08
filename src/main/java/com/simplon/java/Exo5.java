@@ -1,11 +1,17 @@
 package com.simplon.java;
 import java.sql.*;
+import java.util.Scanner;
 
-public class Exo2
+public class Exo5
 {
     public static void main( String[] args )
     {
-    	String request = "SELECT * FROM emp";
+		Scanner sc = new Scanner(System.in);
+	    System.out.print("Saisir le nom : ");
+	    String userSearch = sc.nextLine();
+	    userSearch = userSearch.toUpperCase();
+	    
+    	String request = "SELECT * FROM emp WHERE nom = '" + userSearch + "'";
     	
     	try {
     		Connection connect = DBConnect.connectToPg();
@@ -14,7 +20,7 @@ public class Exo2
     		ResultSet result = stat.executeQuery(request);
         	
         	while (result.next()) {
-        		System.out.println("Nom : " + result.getString("nom") + "; Prénom : "  + result.getString("prenom"));
+        		System.out.println("Nom : " + result.getString("nom"));
         	}
         	
         	connect.close();

@@ -19,9 +19,9 @@ public class Exo3
         	
         	connect.close();
     		
-    	} catch (Exception e){
-    		
-    	}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
     	
     }
 }
