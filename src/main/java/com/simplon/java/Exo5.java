@@ -8,8 +8,7 @@ public class Exo5
     {
 		Scanner sc = new Scanner(System.in);
 	    System.out.print("Saisir le nom : ");
-	    String userSearch = sc.nextLine();
-	    userSearch = userSearch.toUpperCase();
+	    String userSearch = sc.nextLine().toUpperCase();
 	    
     	String request = "SELECT * FROM emp WHERE nom = '" + userSearch + "'";
     	
