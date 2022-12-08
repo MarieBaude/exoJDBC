@@ -5,7 +5,7 @@ public class Exo4
 {
     public static void main( String[] args )
     {
-    	String request = "SELECT * FROM emp WHERE service = 'INFORMATIQUE' INNER JOIN serv ON emp.noserv = serv.noserv";
+    	String request = "SELECT * FROM emp INNER JOIN serv ON service = 'INFORMATIQUE';";
     	
     	try {
     		Connection connect = DBConnect.connectToPg();
