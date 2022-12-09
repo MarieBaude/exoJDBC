@@ -5,13 +5,13 @@ public class Exo4v2
 {
     public static void main( String[] args )
     {
-    	String request = "SELECT * FROM emp INNER JOIN serv ON service = 'INFORMATIQUE';";
     	
     	try {
     		Connection connect = DBConnect.connectToPg();
-    		Statement stat = connect.createStatement();
+    		PreparedStatement stat = connect.prepareStatement("SELECT * FROM emp INNER JOIN serv ON service = ?;");
+    		stat.setString(1, "INFORMATIQUE");
     		
-    		ResultSet result = stat.executeQuery(request);
+    		ResultSet result = stat.executeQuery();
         	
         	while (result.next()) {
         		System.out.println("Nom : " + result.getString("nom") + "; Prénom : "  + result.getString("prenom") + "; Service : "  + result.getString("service"));
