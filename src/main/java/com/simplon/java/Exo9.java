@@ -124,7 +124,58 @@ public class Exo9 {
 	}
 	
 	public static void update() {
-		System.out.println("up");
+		Scanner scNumEmp = new Scanner(System.in);
+	    System.out.print("Saisir l'id : ");
+	    String numEmp = scNumEmp.nextLine().toUpperCase();
+		
+	    Scanner scLastName = new Scanner(System.in);
+	    System.out.print("Saisir le nom de famille: ");
+	    String lastName = scLastName.nextLine().toUpperCase();
+	    
+	    Scanner scFirstName = new Scanner(System.in);
+	    System.out.print("Saisir le prénom: ");
+	    String firstName = scFirstName.nextLine().toUpperCase();
+	    
+	    Scanner scEmploi = new Scanner(System.in);
+	    System.out.print("Saisir l'emploi: ");
+	    String emploi = scEmploi.nextLine().toUpperCase();
+	    
+	    Scanner scSup = new Scanner(System.in);
+	    System.out.print("Saisir le sup (nombre): ");
+	    int sup = scSup.nextInt();
+	    
+	    Scanner scDate = new Scanner(System.in);
+	    System.out.print("Saisir la date d'embauche (jj/mm/aaaa): ");
+	    String date = scDate.nextLine();
+	    
+	    Scanner scSal = new Scanner(System.in);
+	    System.out.print("Saisir le salaire: ");
+	    int sal = scSal.nextInt();
+	    
+	    Scanner scComm = new Scanner(System.in);
+	    System.out.print("Saisir la commission: ");
+	    int comm = scComm.nextInt();
+	    
+	    Scanner scNoServ = new Scanner(System.in);
+	    System.out.print("Saisir le numéro de service: ");
+	    int noServ = scNoServ.nextInt();
+	    
+	    String request = "UPDATE emp SET nom = '" + lastName + "', prenom = '" + firstName + "', emploi = '" 
+	    + emploi + "', sup = '" + sup + "', embauche = '" + date + "', sal = '" + sal + "', comm = '" + comm + "', noServ = '" + noServ + "'"
+	    + "WHERE noemp = '" + numEmp + "';";
+	    
+	    try {
+    		Connection connect = DBConnect.connectToPg();
+    		Statement stat = connect.createStatement();
+    		stat.executeUpdate(request);
+        	
+        	System.out.println("Nouvelle information bien enregistrer");
+        	
+        	connect.close();
+    		
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
 	}
 	
 	public static void delete() {
@@ -141,9 +192,7 @@ public class Exo9 {
     	try {
     		Connection connect = DBConnect.connectToPg();
     		Statement stat = connect.createStatement();
-    		
-    		ResultSet result = stat.executeQuery(request);
-        	
+    		stat.executeUpdate(request);
         
         	System.out.println("Employé bien supprimer");
         	
