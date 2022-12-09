@@ -9,17 +9,9 @@ public class Exo6
     {
     	System.out.println("Saisissez une date (AAAA-MM-JJ) :");
     	Scanner sc = new Scanner(System.in);
-    	String userSearch = sc.nextLine();
+    	int userSearch = sc.nextInt();
 	    
-	    /*if(userSearch.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}")){
-	        SimpleDateFormat f = new SimpleDateFormat("MM-dd-yyyy");
-	        Date date = f.parse(userSearch);
-	    }
-	    else {
-	        System.out.println("Erreur format");
-	    }*/
-	    
-    	String request = "SELECT * FROM emp WHERE embauche = '" + userSearch + "'";
+    	String request = "SELECT * FROM emp WHERE EXTRACT (YEAR FROM embauche) = '" + userSearch + "'";
     	
     	try {
     		Connection connect = DBConnect.connectToPg();
@@ -28,7 +20,7 @@ public class Exo6
     		ResultSet result = stat.executeQuery(request);
         	
         	while (result.next()) {
-        		System.out.println("Date d'embauche : " + result.getString("embauche"));
+        		System.out.println("Nom : " + result.getString("nom") + "; Prénom : " + result.getString("prenom") + "; Date d'embauche : " + result.getString("embauche"));
         	}
         	
         	connect.close();
