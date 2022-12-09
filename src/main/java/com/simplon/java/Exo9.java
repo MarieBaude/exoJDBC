@@ -47,11 +47,80 @@ public class Exo9 {
 	}
 	
 	public static void details() {
-		System.out.println("détails");
+		Scanner sc = new Scanner(System.in);
+	    System.out.print("Saisir le nom de famille: ");
+	    String lastNameSearch = sc.nextLine().toUpperCase();
+	    
+	    Scanner sc2 = new Scanner(System.in);
+	    System.out.print("Saisir le prénom : ");
+	    String firstNameSearch = sc2.nextLine().toUpperCase();
+	    
+    	String request = "SELECT * FROM emp WHERE nom = '" + lastNameSearch + "' AND prenom = '" + firstNameSearch + "'";
+    	
+    	try {
+    		Connection connect = DBConnect.connectToPg();
+    		Statement stat = connect.createStatement();
+    		
+    		ResultSet result = stat.executeQuery(request);
+        	
+        	while (result.next()) {
+        		System.out.println("Nom : " + result.getString("nom") + "; Prénom : " + result.getString("prenom") + "; Emploi : " + result.getString("emploi") + "; Sup : " + result.getString("sup") + "; Date d'embauche : " + result.getString("embauche") + "; Salaire : " + result.getString("sal") + "; Commision : " + result.getString("comm") + "; Numéro de service : " + result.getString("noserv"));
+        	}
+        	
+        	connect.close();
+    		
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
 	}
 	
 	public static void add() {
-		System.out.println("add");
+		Scanner scLastName = new Scanner(System.in);
+	    System.out.print("Saisir le nom de famille: ");
+	    String lastName = scLastName.nextLine().toUpperCase();
+	    
+	    Scanner scFirstName = new Scanner(System.in);
+	    System.out.print("Saisir le prénom: ");
+	    String firstName = scFirstName.nextLine().toUpperCase();
+	    
+	    Scanner scEmploi = new Scanner(System.in);
+	    System.out.print("Saisir l'emploi: ");
+	    String emploi = scEmploi.nextLine().toUpperCase();
+	    
+	    Scanner scSup = new Scanner(System.in);
+	    System.out.print("Saisir le sup (nombre): ");
+	    int sup = scSup.nextInt();
+	    
+	    Scanner scDate = new Scanner(System.in);
+	    System.out.print("Saisir la date d'embauche (jj/mm/aaaa): ");
+	    String date = scDate.nextLine();
+	    
+	    Scanner scSal = new Scanner(System.in);
+	    System.out.print("Saisir le salaire: ");
+	    int sal = scSal.nextInt();
+	    
+	    Scanner scComm = new Scanner(System.in);
+	    System.out.print("Saisir la commission: ");
+	    int comm = scComm.nextInt();
+	    
+	    Scanner scNoServ = new Scanner(System.in);
+	    System.out.print("Saisir le numéro de service: ");
+	    int noServ = scNoServ.nextInt();
+	    
+	    String request = "INSERT INTO emp VALUES (2167, '" + lastName + "', '" + firstName + "', '" + emploi + "', " + sup + ", to_date('" + date + "','dd/MM/yy')," + sal + ", " + comm + ", " + noServ + ");";
+	    
+	    try {
+    		Connection connect = DBConnect.connectToPg();
+    		Statement stat = connect.createStatement();
+    		stat.executeUpdate(request);
+        	
+        	System.out.println("Nouvel emploi bien enregistré");
+        	
+        	connect.close();
+    		
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
 	}
 	
 	public static void update() {
@@ -59,7 +128,33 @@ public class Exo9 {
 	}
 	
 	public static void delete() {
-		System.out.println("del");
+		Scanner scLastName = new Scanner(System.in);
+	    System.out.print("Saisir le nom de famille: ");
+	    String lastName = scLastName.nextLine().toUpperCase();
+	    
+	    Scanner scFirstName = new Scanner(System.in);
+	    System.out.print("Saisir le prénom: ");
+	    String firstName = scFirstName.nextLine().toUpperCase();
+	    
+	    String request = "DELETE FROM emp WHERE nom = '" + lastName + "' AND prenom = '" + firstName + "'";
+    	
+    	try {
+    		Connection connect = DBConnect.connectToPg();
+    		Statement stat = connect.createStatement();
+    		
+    		ResultSet result = stat.executeQuery(request);
+        	
+        
+        	System.out.println("Employé bien supprimer");
+        	
+        	
+        	connect.close();
+    		
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+	    
+	    
 	}
 
 	public static void main( String[] args ) throws IOException {
