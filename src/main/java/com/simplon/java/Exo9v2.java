@@ -165,9 +165,18 @@ public class Exo9v2 {
 	    System.out.print("Saisir le sup (nombre): ");
 	    int sup = scSup.nextInt();
 	    
-	    Scanner scDate = new Scanner(System.in);
-	    System.out.print("Saisir la date d'embauche (jj/mm/aaaa): ");
-	    String date = scDate.nextLine();
+	    Scanner in = new Scanner(System.in);
+	    System.out.println("Saisir la date d'embauche : ");
+	    System.out.println("Jour :");
+		int day = in.nextInt();
+		System.out.println("Mois : ");
+		int month = in.nextInt();
+		System.out.println("Année : ");
+		int year = in.nextInt();
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(year, month - 1, day);
+		Date finalDate = new Date(calendar.getTimeInMillis());
 	    
 	    Scanner scSal = new Scanner(System.in);
 	    System.out.print("Saisir le salaire: ");
@@ -184,16 +193,17 @@ public class Exo9v2 {
 	    
 	    try {
     		Connection connect = DBConnect.connectToPg();
-    		PreparedStatement stat = connect.prepareStatement("UPDATE emp SET nom = ?, prenom = ?, emploi = ?, sup = ?, embauche = ?, sal = ?, comm = ?, noServ = ? WHERE noemp = ?");
+    		PreparedStatement stat = connect.prepareStatement("UPDATE emp SET noemp = ?, nom = ?, prenom = ?, emploi = ?, sup = ?, embauche = ?, sal = ?, comm = ?, noServ = ? WHERE noemp = ?");
     		stat.executeUpdate();
-    		stat.setString(1, lastName);
-    		stat.setString(2, firstName);
-    		stat.setString(3, emploi);
-    		stat.setInt(4, sup);
-    		stat.setString(5, date);
-    		stat.setInt(6, sal);
-    		stat.setInt(7, comm);
-    		stat.setInt(8, noServ);
+    		stat.setString(1, numEmp);
+    		stat.setString(2, lastName);
+    		stat.setString(3, firstName);
+    		stat.setString(4, emploi);
+    		stat.setInt(5, sup);
+    		stat.setDate(6, finalDate);
+    		stat.setInt(7, sal);
+    		stat.setInt(8, comm);
+    		stat.setInt(9, noServ);
         	
         	System.out.println("Nouvelle information bien enregistrer");
         	
