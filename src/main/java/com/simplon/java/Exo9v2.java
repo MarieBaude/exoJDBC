@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -106,8 +106,7 @@ public class Exo9v2 {
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(year, month - 1, day);
-		Date finalDate = null;
-		finalDate = calendar.getTime();
+		Date finalDate = new Date(calendar.getTimeInMillis());
 	    
 	    Scanner scSal = new Scanner(System.in);
 	    System.out.print("Saisir le salaire: ");
@@ -124,7 +123,7 @@ public class Exo9v2 {
 	    
 	    try {
     		Connection connect = DBConnect.connectToPg();
-    		PreparedStatement stat = connect.prepareStatement("INSERT INTO emp VALUES (2167, ?, ?, ?, ?, ?, ?, ?, ?);");
+    		PreparedStatement stat = connect.prepareStatement("INSERT INTO emp VALUES (5168, ?, ?, ?, ?, ?, ?, ?, ?);");
     		stat.setString(1, lastName);
     		stat.setString(2, firstName);
     		stat.setString(3, emploi);
