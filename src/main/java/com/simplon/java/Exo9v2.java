@@ -95,7 +95,7 @@ public class Exo9v2 {
 	    int sup = scSup.nextInt();
 	    
 	    Scanner in = new Scanner(System.in);
-	    System.out.print("Saisir la date d'embauche : ");
+	    System.out.println("Saisir la date d'embauche : ");
 	  
 		System.out.println("Jour :");
 		int day = in.nextInt();
@@ -103,10 +103,11 @@ public class Exo9v2 {
 		int month = in.nextInt();
 		System.out.println("Année : ");
 		int year = in.nextInt();
+		
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(year, month - 1, day);
-		Date recruit = null;
-		recruit = calendar.getTime();
+		Date finalDate = null;
+		finalDate = calendar.getTime();
 	    
 	    Scanner scSal = new Scanner(System.in);
 	    System.out.print("Saisir le salaire: ");
@@ -128,7 +129,7 @@ public class Exo9v2 {
     		stat.setString(2, firstName);
     		stat.setString(3, emploi);
     		stat.setInt(4, sup);
-    		stat.setDate(5, (java.sql.Date) recruit);
+    		stat.setDate(5, finalDate);
     		stat.setInt(6, sal);
     		stat.setInt(7, comm);
     		stat.setInt(8, noServ);
