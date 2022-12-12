@@ -166,49 +166,55 @@ public class Exo9v2 {
 	
 	/**
 	 * For update a employee with his id
-	 * sc.nextLine after numEmp variable declation is for a return line bug
 	 * 
 	 * @author Marie Baude
 	 */
 	public static void update() {
 		Scanner sc = new Scanner(System.in);
-	   
 		System.out.println("Saisir l'id : ");
 	    int numEmp = sc.nextInt();
-	    sc.nextLine();
 			   
-	    System.out.println("Saisir le nom de famille: ");
-	    String lastName = sc.nextLine().toUpperCase();
-
-	    System.out.println("Saisir le prénom: ");
-	    String firstName = sc.nextLine().toUpperCase();
-
-	    System.out.println("Saisir l'emploi: ");
-	    String emploi = sc.nextLine().toUpperCase();
+	    Scanner scLastName = new Scanner(System.in);
+	    System.out.print("Saisir le nom de famille: ");
+	    String lastName = scLastName.nextLine().toUpperCase();
 	    
-	    System.out.println("Saisir le sup (nombre): ");
-	    int sup = sc.nextInt();
+	    Scanner scFirstName = new Scanner(System.in);
+	    System.out.print("Saisir le prénom: ");
+	    String firstName = scFirstName.nextLine().toUpperCase();
 	    
+	    Scanner scEmploi = new Scanner(System.in);
+	    System.out.print("Saisir l'emploi: ");
+	    String emploi = scEmploi.nextLine().toUpperCase();
+	    
+	    Scanner scSup = new Scanner(System.in);
+	    System.out.print("Saisir le sup (nombre): ");
+	    int sup = scSup.nextInt();
+	    
+	    Scanner in = new Scanner(System.in);
 	    System.out.println("Saisir la date d'embauche : ");
-	    System.out.println("Jour :");
-		int day = sc.nextInt();
+	  
+		System.out.println("Jour :");
+		int day = in.nextInt();
 		System.out.println("Mois : ");
-		int month = sc.nextInt();
+		int month = in.nextInt();
 		System.out.println("Année : ");
-		int year = sc.nextInt();
+		int year = in.nextInt();
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(year, month - 1, day);
 		Date finalDate = new Date(calendar.getTimeInMillis());
-
-	    System.out.println("Saisir le salaire: ");
-	    int sal = sc.nextInt();
-
-	    System.out.println("Saisir la commission: ");
-	    int comm = sc.nextInt();
-	 
-	    System.out.println("Saisir le numéro de service: ");
-	    int noServ = sc.nextInt();
+	    
+	    Scanner scSal = new Scanner(System.in);
+	    System.out.print("Saisir le salaire: ");
+	    int sal = scSal.nextInt();
+	    
+	    Scanner scComm = new Scanner(System.in);
+	    System.out.print("Saisir la commission: ");
+	    int comm = scComm.nextInt();
+	    
+	    Scanner scNoServ = new Scanner(System.in);
+	    System.out.print("Saisir le numéro de service: ");
+	    int noServ = scNoServ.nextInt();
 	    
 	    try {
     		Connection connect = DBConnect.connectToPg();
@@ -263,7 +269,12 @@ public class Exo9v2 {
 	    
 	    
 	}
-
+	
+	/**
+	 * Main with a console menu
+	 * 
+	 * @author Marie Baude
+	 */
 	public static void main( String[] args ) throws IOException {
     	
     	int userSelected;
