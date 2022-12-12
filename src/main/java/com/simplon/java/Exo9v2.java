@@ -60,24 +60,19 @@ public class Exo9v2 {
 	}
 	
 	/**
-	 * A function for display the employee detail with his lastname et firstname
+	 * A function for display the employee detail with his id
 	 * 
 	 * @author Marie Baude
 	 */
 	public static void details() {
 		Scanner sc = new Scanner(System.in);
-	    System.out.print("Saisir le nom de famille: ");
-	    String lastNameSearch = sc.nextLine().toUpperCase();
-	    
-	    Scanner sc2 = new Scanner(System.in);
-	    System.out.print("Saisir le prénom : ");
-	    String firstNameSearch = sc2.nextLine().toUpperCase();
+		System.out.println("Saisir l'id : ");
+	    int numEmp = sc.nextInt();
     	
     	try {
     		Connection connect = DBConnect.connectToPg();
-    		PreparedStatement stat = connect.prepareStatement("SELECT * FROM emp WHERE nom = ? AND prenom = ?");
-    		stat.setString(1, lastNameSearch);
-    		stat.setString(2, firstNameSearch);
+    		PreparedStatement stat = connect.prepareStatement("SELECT * FROM emp WHERE noemp = ?");
+    		stat.setInt(1, numEmp);
     		
     		ResultSet result = stat.executeQuery();
         	
