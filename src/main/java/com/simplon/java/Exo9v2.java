@@ -147,7 +147,7 @@ public class Exo9v2 {
 	public static void update() {
 		Scanner scNumEmp = new Scanner(System.in);
 	    System.out.print("Saisir l'id : ");
-	    String numEmp = scNumEmp.nextLine().toUpperCase();
+	    int numEmp = scNumEmp.nextInt();
 		
 	    Scanner scLastName = new Scanner(System.in);
 	    System.out.print("Saisir le nom de famille: ");
@@ -194,8 +194,8 @@ public class Exo9v2 {
 	    try {
     		Connection connect = DBConnect.connectToPg();
     		PreparedStatement stat = connect.prepareStatement("UPDATE emp SET noemp = ?, nom = ?, prenom = ?, emploi = ?, sup = ?, embauche = ?, sal = ?, comm = ?, noServ = ? WHERE noemp = ?");
-    		stat.executeUpdate();
-    		stat.setString(1, numEmp);
+    		
+    		stat.setInt(1, numEmp);
     		stat.setString(2, lastName);
     		stat.setString(3, firstName);
     		stat.setString(4, emploi);
@@ -204,11 +204,12 @@ public class Exo9v2 {
     		stat.setInt(7, sal);
     		stat.setInt(8, comm);
     		stat.setInt(9, noServ);
+    		stat.setInt(10, numEmp);
         	
-        	System.out.println("Nouvelle information bien enregistrer");
-        	
-        	connect.close();
+    		stat.executeUpdate();
     		
+    		connect.close();
+        	System.out.println("Nouvelle information bien enregistrer");
     	} catch (SQLException e) {
             e.printStackTrace();
         }
