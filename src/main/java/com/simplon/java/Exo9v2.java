@@ -13,6 +13,11 @@ import java.util.Scanner;
 
 public class Exo9v2 {
 	
+	/**
+	 * Content of the menu
+	 * 
+	 * @author Marie Baude
+	 */
 	private static int menuData() {
 		int selection;
 		Scanner sc7 = new Scanner (System.in);
@@ -28,6 +33,11 @@ public class Exo9v2 {
 		return selection;
 	}
 	
+	/**
+	 * A function for display all the employee
+	 * 
+	 * @author Marie Baude
+	 */
 	public static void listOfAll() {
 		System.out.println("Liste de tout les employés : ");
 		String request = "SELECT * FROM emp";
@@ -49,6 +59,11 @@ public class Exo9v2 {
         }
 	}
 	
+	/**
+	 * A function for display the employee detail with his lastname et firstname
+	 * 
+	 * @author Marie Baude
+	 */
 	public static void details() {
 		Scanner sc = new Scanner(System.in);
 	    System.out.print("Saisir le nom de famille: ");
@@ -77,6 +92,11 @@ public class Exo9v2 {
         }
 	}
 	
+	/**
+	 * For add a new employee
+	 * 
+	 * @author Marie Baude
+	 */
 	public static void add() {
 		Scanner scLastName = new Scanner(System.in);
 	    System.out.print("Saisir le nom de famille: ");
@@ -144,52 +164,51 @@ public class Exo9v2 {
         }
 	}
 	
+	/**
+	 * For update a employee with his id
+	 * sc.nextLine after numEmp variable declation is for a return line bug
+	 * 
+	 * @author Marie Baude
+	 */
 	public static void update() {
-		Scanner scNumEmp = new Scanner(System.in);
-	    System.out.print("Saisir l'id : ");
-	    int numEmp = scNumEmp.nextInt();
-		
-	    Scanner scLastName = new Scanner(System.in);
-	    System.out.print("Saisir le nom de famille: ");
-	    String lastName = scLastName.nextLine().toUpperCase();
+		Scanner sc = new Scanner(System.in);
+	   
+		System.out.println("Saisir l'id : ");
+	    int numEmp = sc.nextInt();
+	    sc.nextLine();
+			   
+	    System.out.println("Saisir le nom de famille: ");
+	    String lastName = sc.nextLine().toUpperCase();
+
+	    System.out.println("Saisir le prénom: ");
+	    String firstName = sc.nextLine().toUpperCase();
+
+	    System.out.println("Saisir l'emploi: ");
+	    String emploi = sc.nextLine().toUpperCase();
 	    
-	    Scanner scFirstName = new Scanner(System.in);
-	    System.out.print("Saisir le prénom: ");
-	    String firstName = scFirstName.nextLine().toUpperCase();
+	    System.out.println("Saisir le sup (nombre): ");
+	    int sup = sc.nextInt();
 	    
-	    Scanner scEmploi = new Scanner(System.in);
-	    System.out.print("Saisir l'emploi: ");
-	    String emploi = scEmploi.nextLine().toUpperCase();
-	    
-	    Scanner scSup = new Scanner(System.in);
-	    System.out.print("Saisir le sup (nombre): ");
-	    int sup = scSup.nextInt();
-	    
-	    Scanner in = new Scanner(System.in);
 	    System.out.println("Saisir la date d'embauche : ");
 	    System.out.println("Jour :");
-		int day = in.nextInt();
+		int day = sc.nextInt();
 		System.out.println("Mois : ");
-		int month = in.nextInt();
+		int month = sc.nextInt();
 		System.out.println("Année : ");
-		int year = in.nextInt();
+		int year = sc.nextInt();
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(year, month - 1, day);
 		Date finalDate = new Date(calendar.getTimeInMillis());
-	    
-	    Scanner scSal = new Scanner(System.in);
-	    System.out.print("Saisir le salaire: ");
-	    int sal = scSal.nextInt();
-	    
-	    Scanner scComm = new Scanner(System.in);
-	    System.out.print("Saisir la commission: ");
-	    int comm = scComm.nextInt();
-	    
-	    Scanner scNoServ = new Scanner(System.in);
-	    System.out.print("Saisir le numéro de service: ");
-	    int noServ = scNoServ.nextInt();
-	
+
+	    System.out.println("Saisir le salaire: ");
+	    int sal = sc.nextInt();
+
+	    System.out.println("Saisir la commission: ");
+	    int comm = sc.nextInt();
+	 
+	    System.out.println("Saisir le numéro de service: ");
+	    int noServ = sc.nextInt();
 	    
 	    try {
     		Connection connect = DBConnect.connectToPg();
@@ -215,21 +234,21 @@ public class Exo9v2 {
         }
 	}
 	
+	/**
+	 * Delete a employee with his id
+	 * 
+	 * @author Marie Baude
+	 */
 	public static void delete() {
-		Scanner scLastName = new Scanner(System.in);
-	    System.out.print("Saisir le nom de famille: ");
-	    String lastName = scLastName.nextLine().toUpperCase();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Saisir l'id : ");
+	    int numEmp = sc.nextInt();
+	    sc.nextLine();
 	    
-	    Scanner scFirstName = new Scanner(System.in);
-	    System.out.print("Saisir le prénom: ");
-	    String firstName = scFirstName.nextLine().toUpperCase();
-	    
-    	
     	try {
     		Connection connect = DBConnect.connectToPg();
-    		PreparedStatement stat = connect.prepareStatement("DELETE FROM emp WHERE nom = ? AND prenom = ? ");
-    		stat.setString(1, lastName);
-    		stat.setString(2, firstName);
+    		PreparedStatement stat = connect.prepareStatement("DELETE FROM emp WHERE noemp = ? ");
+    		stat.setInt(1, numEmp);
     		
     		stat.executeUpdate();
         
