@@ -27,6 +27,7 @@ public class Exo9v2 {
 		System.out.println("3) Ajouté un employé");
 		System.out.println("4) Modifier un employé");
 		System.out.println("5) Supprimer un employé");
+		System.out.println("6) Quitter le programme");
 
 		System.out.println("Votre sélection est : ");
 		selection = sc7.nextInt();
@@ -273,6 +274,7 @@ public class Exo9v2 {
 	public static void main( String[] args ) throws IOException {
     	
     	int userSelected;
+    	boolean exit=false;
     		
     	do {
     		userSelected = menuData();
@@ -292,11 +294,15 @@ public class Exo9v2 {
     		case 5:
     			delete();
     			break;
+    		case 6:
+    			System.out.println("Programme fermé");
+    			exit=true;
+    			break;
     		default:
     			break;
     		}
     	}
-    	while(userSelected > 5);
+    	while(!exit);
     }
 
 }
